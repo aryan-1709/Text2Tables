@@ -2,7 +2,15 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from dotenv import load_dotenv
-load_dotenv() ## load all the environemnt variables
+
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except:
+    pass
+
+# Get the API key (from secrets or env)
+GOOGLE_API_KEY = st.secrets.get("GOOGLE_API_KEY") or os.getenv("GOOGLE_API_KEY")
 
 import streamlit as st
 import os
@@ -11,7 +19,7 @@ import sqlite3
 ## Function To Load Google Gemini Model and provide queries as response
 
 def get_gemini_response(question,prompt):
-    model=ChatGoogleGenerativeAI(model='gemini-1.5-pro')
+    model=ChatGoogleGenerativeAI(model='gemini-1.5-pro', google_api_key=GOOGLE_API_KEY)
     prompt=ChatPromptTemplate([
         ('system',prompt),
         ('human',question)
