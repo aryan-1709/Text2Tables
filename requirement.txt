@@ -1,0 +1,32 @@
+# LangChain Core
+langchain
+langchain-core
+langchain-community
+langchain-experimental
+pypdf
+
+#vetoerd DB
+chromadb
+tiktoken
+
+# Google Gemini (PaLM) Integration
+langchain-google-genai
+google-generativeai
+
+# Mistral Integration
+langchain-mistralai
+mistral
+
+# Environment Variable Management
+python-dotenv
+
+# Machine Learning Utilities
+numpy
+scikit-learn
+
+# sql 
+# pdf2image
+# sqlite3 (alread present with python no need to install)
+
+# hosting
+streamlit
