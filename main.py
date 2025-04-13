@@ -5,11 +5,18 @@ import streamlit as st
 import os
 import sqlite3
 from dotenv import load_dotenv
-load_dotenv()
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except:
+    pass
+
+# Get the API key (from secrets or env)
+GOOGLE_API_KEY = st.secrets.get("GOOGLE_API_KEY") or os.getenv("GOOGLE_API_KEY")
 
 # Define LLM response function
 def get_gemini_response(question, prompt):
-    model = ChatGoogleGenerativeAI(model='gemini-1.5-pro')
+    model = ChatGoogleGenerativeAI(model='gemini-1.5-pro', google_api_key=GOOGLE_API_KEY)
     prompt = ChatPromptTemplate([
         ('system', prompt),
         ('human', question)
@@ -77,4 +84,3 @@ if st.session_state.generated_sql:
                 st.write(row)
         else:
             st.info("No rows returned.")
-# This code is a simple Streamlit application that allows users to ask questions about a database and get SQL queries and results in response. It uses the Gemini LLM to generate SQL queries based on user input and SQLite to execute those queries against a database. The application also handles errors gracefully and provides a user-friendly interface for interaction.
