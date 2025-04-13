@@ -2,6 +2,9 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from dotenv import load_dotenv
+import streamlit as st
+import os
+import sqlite3
 
 try:
     from dotenv import load_dotenv
@@ -12,12 +15,7 @@ except:
 # Get the API key (from secrets or env)
 GOOGLE_API_KEY = st.secrets.get("GOOGLE_API_KEY") or os.getenv("GOOGLE_API_KEY")
 
-import streamlit as st
-import os
-import sqlite3
-
 ## Function To Load Google Gemini Model and provide queries as response
-
 def get_gemini_response(question,prompt):
     model=ChatGoogleGenerativeAI(model='gemini-1.5-pro', google_api_key=GOOGLE_API_KEY)
     prompt=ChatPromptTemplate([
